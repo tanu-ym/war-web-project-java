@@ -42,7 +42,7 @@ pipeline {
 		}
 	post {
              success {
-		echo "CICD pipeline succeeded"
+		echo "CICD pipeline succeeded*"
     	     }
 	}
 }
