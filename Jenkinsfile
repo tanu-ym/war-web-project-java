@@ -17,6 +17,13 @@ pipeline {
                 sh "mvn clean install"
             }
         }
+        stage('Check Credentials') {
+           steps {
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                    sh "echo 'Sonar Token Retrieved: ${SONAR_TOKEN:0:4}****'" // Mask the token for security
+                 }
+           }
+        }
         stage('debug credentials') {
             steps {
                 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
