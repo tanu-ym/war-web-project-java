@@ -4,7 +4,7 @@ pipeline {
 		maven 'maven'
 	}
 	environment {
-        SONARQUBE_URL = 'http://65.2.142.70:9000'
+        SONARQUBE_URL = 'http://3.110.90.173:9000'
         SONARQUBE_CREDENTIALS = credentials('jenkin-sonar-token') 
         }
 	stages {
