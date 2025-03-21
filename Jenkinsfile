@@ -1,7 +1,7 @@
 pipeline {
 	agent { label 'tomcat' }
 	tools { 
-		maven 'Maven-3.9.6'
+		maven 'maven'
 	}
 	stages {
 		stage('git checkout') {
