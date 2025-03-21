@@ -27,7 +27,7 @@ pipeline {
         stage('debug credentials') {
             steps {
                 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                    sh "echo 'Sonar Token Retrieved: $SONAR_TOKEN'"
+                    sh 'echo "Sonar Token Retrieved: ${SONAR_TOKEN:0:4}****"'
                 }
             }
         }
