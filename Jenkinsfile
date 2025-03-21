@@ -20,16 +20,9 @@ pipeline {
         stage('Check Credentials') {
            steps {
                 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                    sh "echo 'Sonar Token Retrieved: ${SONAR_TOKEN:0:4}****'" // Mask the token for security
+                    sh 'echo "Sonar Token Retrieved: ${SONAR_TOKEN:0:4}****"'
                  }
            }
-        }
-        stage('debug credentials') {
-            steps {
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                    sh 'echo "Sonar Token Retrieved: ${SONAR_TOKEN:0:4}****"'
-                }
-            }
         }
         stage('sonarqube analysis') {
             steps {
