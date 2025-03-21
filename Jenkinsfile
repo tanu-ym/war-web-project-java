@@ -31,7 +31,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh "cp /home/ec2-user/war-web-project/target/wwp-1.0.0.war /opt/tomcat/webapps"
+                sh "sudo cp /home/ec2-user/war-web-project/target/wwp-1.0.0.war /opt/tomcat/webapps"
             }
         }
     }
