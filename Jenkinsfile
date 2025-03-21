@@ -3,6 +3,10 @@ pipeline {
 	tools { 
 		maven 'maven'
 	}
+	environment {
+        SONARQUBE_URL = 'http://65.2.142.70:9000'
+        SONARQUBE_CREDENTIALS = credentials('jenkin-sonar-token') 
+        }
 	stages {
 		stage('git checkout') {
 			steps {
@@ -16,11 +20,11 @@ pipeline {
 		}
 		stage('sonarqube analysis') {
 			steps {
-				withSonarQubeEnv(sonar) {
-                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=sonar_project_1"
+		            withSonarQubeEnv(sonar) {
+                               sh 'mvn sonar:sonar -Dsonar.projectKey=my_project -Dsonar.host.url=$SONARQUBE_URL -Dsonar.login=$SONARQUBE_CREDENTIALS'
+                            }
+                         }
                 }
-            }
-        }
 		stage('deploy') {
 			steps {
 				sh "cp /home/ec2-user/war-web-project/target/wwp-1.0.0.war /opt/tomcat/webapps"
@@ -28,8 +32,8 @@ pipeline {
 			}
 		}
 	post {
-			success {
-				echo "CICD pipeline succeeded"
-			}
+             success {
+		echo "CICD pipeline succeeded"
+    	     }
 	}
 }
