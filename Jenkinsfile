@@ -19,14 +19,14 @@ pipeline {
 			}
 		}
 		stage('sonarqube analysis') {
-			steps {
-		            withSonarQubeEnv('SonarQube') {
-                               withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                     		 sh "mvn sonar:sonar -Dsonar.projectKey=my_project -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_TOKEN}"
-          		       }
-                            }
-                         }
-                }
+  			  steps {
+      				  withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+           				 withSonarQubeEnv('SonarQube') {
+               					 sh "mvn sonar:sonar -Dsonar.projectKey=my_project -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_TOKEN}"
+           				 }
+       				 }
+    			}
+		}
 		stage('deploy') {
 			steps {
 				sh "cp /home/ec2-user/war-web-project/target/wwp-1.0.0.war /opt/tomcat/webapps"
