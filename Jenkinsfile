@@ -1,5 +1,8 @@
 pipeline {
 	agent { label 'tomcat' }
+	tools { 
+		maven 'Maven-3.9.6'
+	}
 	stages {
 		stage('git checkout') {
 			steps {
@@ -24,7 +27,7 @@ pipeline {
 				}
 			}
 		}
-	post actions {
+	post {
 			success {
 				echo "CICD pipeline succeeded"
 			}
