@@ -5,7 +5,7 @@ pipeline {
 	}
 	environment {
         SONARQUBE_URL = 'http://65.2.142.70:9000'
-        SONARQUBE_CREDENTIALS = credentials('jenkin-sonar-token') 
+        #SONARQUBE_CREDENTIALS = credentials('jenkin-sonar-token') 
         }
 	stages {
 		stage('git checkout') {
@@ -21,7 +21,9 @@ pipeline {
 		stage('sonarqube analysis') {
 			steps {
 		            withSonarQubeEnv('SonarQube') {
+			       withCredentials([string(credentialsId: 'jenkin-sonar-token', variable: 'SONAR_TOKEN')]) {
                                sh 'mvn sonar:sonar -Dsonar.projectKey=my_project -Dsonar.host.url=$SONARQUBE_URL -Dsonar.login=$SONARQUBE_CREDENTIALS'
+			       }
                             }
                          }
                 }
