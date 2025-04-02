@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('git checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/Sreedhara1993/war-web-project-java.git'
+                git branch: 'master', url: 'https://github.com/tanu-ym/war-web-project-java.git'
             }
         }
         stage('build') {
