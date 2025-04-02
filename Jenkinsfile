@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'tomcat' }
+    agent { label 'ssh' }
     tools { 
         maven 'maven'
     }
